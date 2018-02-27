@@ -1,0 +1,23 @@
+{
+  "name": "bamazon",
+  "version": "1.0.0",
+  "description": "An Amazon-like store user console that utilizes Node.js and MySQL",
+  "main": "customer.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/21ghosts/Bamazon.git"
+  },
+  "author": "Nathan Young",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/21ghosts/Bamazon/issues"
+  },
+  "homepage": "https://github.com/21ghosts/Bamazon#readme",
+  "dependencies": {
+    "inquirer": "^5.1.0",
+    "mysql": "^2.15.0"
+  }
+}
