@@ -20,6 +20,7 @@ var buyProduct;// variable for purchase of product
 var productListings;// list of all products
 var cartPrompt;// prompt questions for user
 
+//utilize prompt : helpful source GreatBay assignment
 cartPrompt = () => {
     inquirer.prompt([
         {   //ask user what item they would like to buy
@@ -45,7 +46,7 @@ cartPrompt = () => {
                 return false;
             }*/
         },
-
+        
     ]).then((answer) => {
         wantedAmount = answer.Amount;
         wantedId = answer.id;
@@ -55,20 +56,23 @@ cartPrompt = () => {
     productListing();
 };
 
+// display the product list to choose from
 productListing = () =>
 {
     //Conection to database
     connection.connect((err) =>
     {
-        if (err) throw err;
+        if (err) throw err;// list errors
         
         connection.query('SELECT * FROM products', (err, res) =>
         {
-            if (err) throw err;
+            if (err) throw err;// list any errors
             
+            //create loop to run through res(ults) length and dipslay sql data
             for (j = 0; j < res.length; j++) {
                 console.log("ID#:" + res[j].item_id + " | " +
-                    "Product Name: " + res[j].product_name + " | " +
+                    "Product Name: " + res[j].product_name + " | " + 
+                    "Department: " + res[j].department_name + " | " +
                     "Price: " + "$" + res[j].price + " | " +
                     "Stock Count: " + res[j].stock_count);
                 console.log("_____________________")
