@@ -97,7 +97,7 @@ buyProduct = (id, requestedAmount) =>
             console.log('The items you have requested are ready.');
             console.log('___________');
             console.log('that will be ' + '$' + priceAmount + ' for ' + requestedAmount + ' ' + res[0].product_name + '(s)');// concatinated response
-            connection.query('UPDATE products SET stock_count = stock_count -' + requestedAmount + "WHERE item_id = " + id);// updates query (had major trouble with this)
+            //connection.query('UPDATE products SET stock_count = stock_count -' + requestedAmount + "WHERE item_id = " + id);// updates query (had major trouble with this)
             console.log(res.length)
         }
         else {
