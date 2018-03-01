@@ -56,10 +56,10 @@ cartPrompt = () => {
     productListing();
 };
 
-// display the product list to choose from
+// display the product list to choose from : helpful source Timothy Dusterdieck TA
 productListing = () =>
 {
-    //Conection to database
+    //Conection to database  
     connection.connect((err) =>
     {
         if (err) throw err;// list errors
@@ -84,21 +84,20 @@ productListing = () =>
 };
 
 
-
-
-
-
-
-buyProduct = (id, requestedAmount) => {
+// set up buyProduct
+buyProduct = (id, requestedAmount) => 
+{   
+    //connect to qurry and select from products item_id
     connection.query("SELECT * FROM products WHERE item_id = " + id, (err, res) => {
-        if (err) throw err;
+        if (err) throw err;// list err
 
+            //if requested amount is less than what we have in stock_count make sale
         if (requestedAmount <= res[0].stock_count) {
-            priceAmount = res[0].price * requestedAmount;
+            priceAmount = res[0].price * requestedAmount;// multiplies price of selected product by requested amount
             console.log('The items you have requested are ready.');
             console.log('___________');
-            console.log('that will be ' + '$' + priceAmount + ' for ' + requestedAmount + ' ' + res[0].product_name + '(s)');
-            connection.query('UPDATE products SET stock_count = stock_count -' + requestedAmount + "WHERE item_id = " + id);
+            console.log('that will be ' + '$' + priceAmount + ' for ' + requestedAmount + ' ' + res[0].product_name + '(s)');// concatinated response
+            connection.query('UPDATE products SET stock_count = stock_count -' + requestedAmount + "WHERE item_id = " + id);// updates query (had major trouble with this)
             console.log(res.length)
         }
         else {
@@ -109,3 +108,10 @@ buyProduct = (id, requestedAmount) => {
 };
 
 cartPrompt();
+
+// helpful resources list:
+// GreatBay assignment
+// Stack Overflow
+// FreeCodecamp
+// Timothy Dusterdieck TA 
+// Dylan Nirvana
