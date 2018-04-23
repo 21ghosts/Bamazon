@@ -6,8 +6,8 @@ Enter Node then customer.js, then follow the prompts.
 
 # Screen Shots
 
-![screen-shot1](sreen-shots/sreen-shot1.png)
+![screen-shot1](srceen-shots/sreen-shot1.png)
 
-![screen-shot2](sreen-shots/sreen-shot2.png)
+![screen-shot2](srceen-shots/sreen-shot2.png)
 
-![screen-shot3](sreen-shots/sreen-shot3.png)
+![screen-shot3](srceen-shots/sreen-shot3.png)
