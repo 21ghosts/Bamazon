@@ -1,15 +1,15 @@
 // list requires
-var inquirer = require('inquirer');
-var mysql = require('mysql');
+const inquirer = require('inquirer');
+const mysql = require('mysql');
 
 //link up with sql database
-var connection = mysql.createConnection({
+const connection = mysql.createConnection({
 
     host: "localhost",
     port: 3308,
-    user:"root",
-    password:"root",
-    database:"bamazon_db"
+    user: "root",
+    password: "root",
+    database: "bamazon_db"
 
 });
 
@@ -46,7 +46,7 @@ cartPrompt = () => {
                 return false;
             }*/
         },
-        
+
     ]).then((answer) => {
         wantedAmount = answer.Amount;
         wantedId = answer.id;
@@ -57,53 +57,49 @@ cartPrompt = () => {
 };
 
 // display the product list to choose from : helpful source Timothy Dusterdieck TA
-productListing = () =>
-{
+productListing = () => {
     //Conection to database  
-    connection.connect((err) =>
-    {
+    connection.connect((err) => {
         if (err) throw err;// list errors
-        
-        connection.query('SELECT * FROM products', (err, res) =>
-        {
+
+        connection.query('SELECT * FROM products', (err, res) => {
             if (err) throw err;// list any errors
-            
+
             //create loop to run through res(ults) length and dipslay sql data
-            for (j = 0; j < res.length; j++) {
-                console.log("ID#:" + res[j].item_id + " | " +
-                    "Product Name: " + res[j].product_name + " | " + 
-                    "Department: " + res[j].department_name + " | " +
-                    "Price: " + "$" + res[j].price + " | " +
-                    "Stock Count: " + res[j].stock_count);
+            for ( let j = 0; j < res.length; j++) {
+                console.log(`ID#: ${res[j].item_id}
+                    Product Name: " + ${res[j].product_name}
+                    Department: " + ${res[j].department_name}
+                    Price: " + "$" + ${res[j].price}
+                    Stock Count: " + ${res[j].stock_count}`);
                 console.log("_____________________")
             }
         });
-        
+
     });
 
 };
 
 
 // set up buyProduct
-buyProduct = (id, requestedAmount) => 
-{   
+buyProduct = (id, requestedAmount) => {
     //connect to qurry and select from products item_id
     connection.query("SELECT * FROM products WHERE item_id = " + id, (err, res) => {
         if (err) throw err;// list err
 
-            //if requested amount is less than what we have in stock_count make sale
+        //if requested amount is less than what we have in stock_count make sale
         if (requestedAmount <= res[0].stock_count) {
             priceAmount = res[0].price * requestedAmount;// multiplies price of selected product by requested amount
             console.log('The items you have requested are ready.');
             console.log('___________');
-            console.log('that will be ' + '$' + priceAmount + ' for ' + requestedAmount + ' ' + res[0].product_name + '(s)');// concatinated response
-            //connection.query('UPDATE products SET stock_count = stock_count -' + requestedAmount + "WHERE item_id = " + id);// updates query (had major trouble with this)
+            console.log(`that will be $${priceAmount} for ${requestedAmount}  ${res[0].product_name}(s)`);// concatinated response
+            
             console.log(res.length)
         }
         else {
-            console.log('Not enough ' + res[0].product_name + ' in stock.');
+            console.log(`Not enough ${res[0].product_name} in stock.`);
         };
-        
+
     });
 };
 
